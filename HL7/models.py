@@ -8,32 +8,33 @@ LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
 STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
+class HL7_MESSAGE_LOGS(models.Model):
+    MESSAGE_ID = models.AutoField('消息ID',primary_key=True)
+    MESSAGE_BODY= models.CharField('消息主体',max_length=100, blank=True, default='')
+    CREATE_USER= models.CharField('创建人',max_length=100, blank=True, default='')
+    CREATE_DATE= models.DateTimeField('创建日期',auto_now_add=True)
+    class Meta:
+        ordering = ('MESSAGE_ID', )
+
 
 class JHINIS_CARE_MAIN(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=100, blank=True, default='')
-    code = models.TextField()
-    linenos = models.BooleanField(default=False)
-    language = models.CharField(
-        choices=LANGUAGE_CHOICES, default='python', max_length=100)
-    style = models.CharField(
-        choices=STYLE_CHOICES, default='friendly', max_length=100)
-    owner = models.ForeignKey(
-        'auth.User', related_name='snippets', on_delete=models.CASCADE)
-    highlighted = models.TextField()
+    CARE_MAIN_INDEX = models.AutoField('护理主索引',primary_key=True)
+    APPLY_ID = models.IntegerField( '该患者是否已经归档', blank=False, null=False, default=0)
+    PATIENT_ID= models.CharField('病案号',max_length=100, blank=True, default='')
+    VISIT_ID = models.IntegerField( '患者住院次', blank=False, null=False, default=0)
+    INP_NO= models.CharField('住院号',max_length=100, blank=True, default='')
+    HOSPITAL_NO= models.CharField('医院编码',max_length=100, blank=True, default='')
+    BED_ID=  models.IntegerField( '床位ID', blank=False, null=False, default=-1)
+    CREATE_USER= models.CharField('创建人',max_length=100, blank=True, default='')
+    CREATE_DATE= models.DateTimeField('创建日期',auto_now_add=True)
+    IN_DEPT_DATE= models.DateTimeField('入科日期')
+    OUT_DEPT_DATE= models.DateTimeField('出科日期')
+    STATE = models.IntegerField( '是否有效（0：有效 1：无效）', blank=False, null=False, default=0)
+    DOCTOR= models.CharField('住院号',max_length=100, blank=True, default='')
+    DEPT_CODE= models.CharField('住院号',max_length=100, blank=True, default='')
 
     class Meta:
-        ordering = ('created', )
+        ordering = ('CARE_MAIN_INDEX', )
 
-    def save(self, *args, **kwargs):
-        """
-        Use the `pygments` library to create a highlighted HTML
-        representation of the code snippet.
-        """
-        lexer = get_lexer_by_name(self.language)
-        linenos = self.linenos and 'table' or False
-        options = self.title and {'title': self.title} or {}
-        formatter = HtmlFormatter(
-            style=self.style, linenos=linenos, full=True, **options)
-        self.highlighted = highlight(self.code, lexer, formatter)
-        super(JHINIS_CARE_MAIN, self).save(*args, **kwargs)
+
+

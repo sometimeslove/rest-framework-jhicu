@@ -84,7 +84,7 @@ DATABASES = {
     # )
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangoblog',
+        'NAME': 'jhicuHL7',
         'USER': os.environ.get('DJANGO_MYSQL_USER'),
         'PASSWORD': os.environ.get('DJANGO_MYSQL_PASSWORD'),
         'HOST':'59.110.44.152' or os.environ.get('DJANGO_MYSQL_HOST'),

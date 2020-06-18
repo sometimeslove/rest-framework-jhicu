@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PRPA_IN400001UV ITSVersion='XML_1.0' xsi:schemaLocation='urn:hl7-org:v3 ../../Schemas/PRPA_IN400001UV02.xsd' xmlns='urn:hl7-org:v3' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+  <id root='1.2.156.112698.1.1.3.4' extension='042B5349-088B-42F7-B865-D1D32338C1C6'/>
+  <creationTime value='2017-05-31 17:16:51'/>
+  <interactionId root='2.16.840.1.113883.1.6' extension='PRPA_IN400001UV'/>
+  <processingCode code='P'/>
+  <processingModeCode code='T'/>
+  <acceptAckCode code='AL'/>
+  <receiver typeCode='RCV'>
+    <device classCode='DEV' determinerCode='INSTANCE'>
+      <id>
+        <item root='1.2.156.112698.1.1.1' extension='JHIP'/>
+      </id>
+    </device>
+  </receiver>
+  <sender typeCode='SND'>
+    <device classCode='DEV' determinerCode='INSTANCE'>
+      <id>
+        <item root='1.2.156.112698.2.1.1' extension='HIS'/>
+      </id>
+    </device>
+  </sender>
+  <controlActProcess classCode='CACT' moodCode='EVN'>
+    <code code='update'/>
+    <subject typeCode='SUBJ'>
+      <encounterEvent>
+        <id>
+          <item root='1.2.156.112698.1.1.2.1.22' extension='1' identifierName=''/>
+          <item extension='0000010799_1' root='1.2.156.112698.1.1.2.1.21'/>
+        </id>
+        <code codeSystem='1.2.156.112698.1.1.1.4.10' code='I'>
+          <displayName value='住院'/>
+        </code>
+        <statusCode code='active'/>
+        <effectiveTime>
+          <any value='2017-05-31 16:03:04'/>
+        </effectiveTime>
+        <priorityCode code='' codeSystem='1.2.156.112698.1.1.1.4.26'>
+          <displayName value=''/>
+        </priorityCode>
+        <admissionReferralSourceCode code='' codeSystem='1.2.156.112698.1.1.1.4.48'>
+          <admissionReferralSourceCode value=''/>
+        </admissionReferralSourceCode>
+        <subject>
+          <patient classCode='PAT'>
+            <id>
+              <item root='1.2.156.112698.1.1.2.1.5' extension='域ID'/>
+              <item root='1.2.156.112698.1.1.2.1.6' extension='0000010799'/>
+              <item root='1.2.156.112698.1.1.2.1.21' extension='就诊号'/>
+            </id>
+            <patientPerson>
+              <name>韩贵忠</name>
+              <administrativeGenderCode code='M' codeSystem='1.2.156.112698.1.1.1.2.1'/>
+              <birthTime value='1935-07-20 00:00:00'>
+                <originalText value='81'/>
+              </birthTime>
+            </patientPerson>
+          </patient>
+        </subject>
+        <responsibleParty typeCode='RESP'>
+          <time/>
+          <assignedOrganization classCode='ASSIGNED'>
+            <id>
+              <item extension='400003235'/>
+            </id>
+            <assignedOrganization classCode='ORG ' determinerCode='INSTANCE '>
+              <name/>
+              <asMember classCode='MBR '>
+                <id>
+                  <item root='1.2.156.112698.1.1.1.4.2' extension=''/>
+                </id>
+                <code>
+                  <displayName value=''/>
+                </code>
+                <group classCode='RGRP' determinerCode='INSTANCE'/>
+              </asMember>
+              <asMember classCode='MBR '>
+                <id>
+                  <item root='1.2.156.112698.1.1.1.4.2' extension='002565'/>
+                </id>
+                <code>
+                  <displayName value='甄洁'/>
+                </code>
+                <group classCode='RGRP' determinerCode='INSTANCE'/>
+              </asMember>
+            </assignedOrganization>
+          </assignedOrganization>
+        </responsibleParty>
+        <admitter typeCode='ADM'>
+          <time/>
+          <assignedPerson classCode='ASSIGNED'>
+            <id>
+              <item root='1.2.156.112698.1.1.1.4.2' extension='333333'/>
+            </id>
+            <assignedPerson classCode='PSN' determinerCode='INSTANCE'>
+              <name>CS123</name>
+            </assignedPerson>
+          </assignedPerson>
+        </admitter>
+        <attender typeCode='ATND'>
+          <time/>
+          <assignedPerson classCode='ASSIGNED'>
+            <id>
+              <item root='1.2.156.112698.1.1.1.4.2' extension='根本没给'/>
+            </id>
+            <assignedPerson classCode='PSN' determinerCode='INSTANCE'>
+              <name>根本没给</name>
+            </assignedPerson>
+          </assignedPerson>
+        </attender>
+        <notificationContact typeCode='NOT'>
+          <notificationParty classCode='CON'>
+            <id/>
+            <contactPerson classCode='PSN'>
+              <id/>
+              <name>梁克梅</name>
+              <telecom use='PUB' value='51871600'/>
+            </contactPerson>
+          </notificationParty>
+        </notificationContact>
+        <location typeCode='LOC'>
+          <time/>
+          <statusCode code='active'/>
+          <serviceDeliveryLocation classCode='SDLOC'>
+            <id>
+              <item root='1.2.156.112698.1.1.1.4.1' extension='ICU'/>
+            </id>
+            <name>重症医学科</name>
+            <location classCode='PLC' determinerCode='INSTANCE'>
+              <id>
+                <item root='1.2.156.112698.1.1.1.4.7' extension='S003'/>
+              </id>
+              <name>重症医学科病区</name>
+              <positionText value='A2026-09  '/>
+            </location>
+          </serviceDeliveryLocation>
+        </location>
+        <reason typeCode='RSON'>
+          <observationDx classCode='OBS' moodCode='EVN'>
+            <code code='过敏编码' codeSystem=''>
+              <displayName value='过敏'/>
+            </code>
+            <statusCode code='completed'/>
+            <value code='过敏原编码' codeSystem='1.2.156.112698.1.1.1.3.25'>
+              <displayName value='过敏原名称'/>
+            </value>
+          </observationDx>
+        </reason>
+        <reason typeCode='RSON'>
+          <observationDx classCode='OBS' moodCode='EVN'>
+            <code code='' codeSystem='1.2.156.112698.1.1.1.3.11'>
+              <displayName value=''/>
+            </code>
+            <statusCode code=' completed'/>
+            <value code='NZ000002' codeSystem='1.2.156.112698.1.1.1.1.2'>
+              <displayName value='急性肾炎伴坏死性肾小球肾炎损害'/>
+            </value>
+          </observationDx>
+        </reason>
+        <reason typeCode='RSON'>
+          <observationDx classCode='OBS' moodCode='EVN'>
+            <code code='体格检查项编码' codeSystem=''>
+              <displayName value='体格检查项名称'/>
+            </code>
+            <statusCode code='completed'/>
+            <value xsi:type='CD' code='检查项结果'/>
+          </observationDx>
+        </reason>
+        <reason typeCode='RSON'>
+          <observationDx classCode='OBS' moodCode='EVN'>
+            <code code='检验子项编码' codeSystem='1.2.156.112698.1.1.1.4.9'>
+              <displayName value='检验子项名称'/>
+            </code>
+            <statusCode code='completed'/>
+            <value code='检验结果编码' codeSystem='1.2.156.112698.1.1.1.4.36'>
+              <displayName value='检验结果'/>
+            </value>
+          </observationDx>
+        </reason>
+      </encounterEvent>
+    </subject>
+  </controlActProcess>
+</PRPA_IN400001UV>
