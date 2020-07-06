@@ -9,12 +9,12 @@ LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
 STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
 class HL7_MESSAGE_LOGS(models.Model):
-    MESSAGE_ID = models.AutoField('消息ID',primary_key=True)
-    MESSAGE_BODY= models.CharField('消息主体',max_length=100, blank=True, default='')
+    # MESSAGE_ID = models.AutoField('消息ID',primary_key=True)
+    MESSAGE_BODY= models.CharField('消息主体',max_length=10000, blank=True, default='')
     CREATE_USER= models.CharField('创建人',max_length=100, blank=True, default='')
     CREATE_DATE= models.DateTimeField('创建日期',auto_now_add=True)
     class Meta:
-        ordering = ('MESSAGE_ID', )
+        ordering = ('CREATE_DATE', )
 
 
 class JHINIS_CARE_MAIN(models.Model):

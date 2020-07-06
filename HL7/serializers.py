@@ -12,6 +12,7 @@ class HL7Serializer(serializers.ModelSerializer):
     class Meta:
         model = HL7_MESSAGE_LOGS
         fields = ('MESSAGE_BODY', 'CREATE_USER')
+        # fields = ('__all__')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,4 +21,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ( 'id',)
+        fields = ( 'id','username')
