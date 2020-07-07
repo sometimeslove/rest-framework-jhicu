@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.models import User
 from rest_framework import permissions, renderers, viewsets
 from rest_framework.decorators import action
@@ -30,14 +32,16 @@ class HL7ViewSet(viewsets.ModelViewSet):
         # serializer.save(owner=self.request.user)
         serializer.save()
         hl7xml = serializer.instance.MESSAGE_BODY;
-        # tree = ET.ElementTree(file=".\HL7\fixtures\test.xml")
-        doc = ET.parse(r'F:\个人项目\rest-framework-jhicu\HL7\fixtures\入科hl7消息报文.xml')
+        path =os.path.abspath(os.curdir)+'\\HL7\\fixtures\\入科hl7消息报文.xml'
+        path = path.replace('\\','/')
+        doc = ET.parse(path)
         root = doc.getroot()
         print(root.tag,"|",root.attrib)
-        namespaces = {'HL7': 'urn:hl7-org:v3','xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
+        # namespaces = {'HL7': 'urn:hl7-org:v3','xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
+        namespace = {'urn':'hl7-org:v3'}
         for child in root:
             print(child.tag,"|",child.text)
-        node = root.find('id')
+        node = root.find('{urn:hl7-org:v3}'+'id')
         print(node.tag)
         print(node.text)
 
