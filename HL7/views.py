@@ -38,10 +38,11 @@ class HL7ViewSet(viewsets.ModelViewSet):
         root = doc.getroot()
         print(root.tag,"|",root.attrib)
         # namespaces = {'HL7': 'urn:hl7-org:v3','xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
-        namespace = {'urn':'hl7-org:v3'}
+        namespace = {'urn':'urn:hl7-org:v3'}
         for child in root:
             print(child.tag,"|",child.text)
-        node = root.find('{urn:hl7-org:v3}'+'id')
+        # node = root.find('{urn:hl7-org:v3}'+'id')
+        node = root.find('urn:id',namespace)
         print(node.tag)
         print(node.text)
 
