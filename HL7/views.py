@@ -9,6 +9,7 @@ from HL7.models import JHINIS_CARE_MAIN
 from HL7.permissions import IsOwnerOrReadOnly
 from HL7.serializers import HL7Serializer, UserSerializer
 import xml.etree.ElementTree as ET
+from HL7.HL7Utils import HL7Utils
 
 class HL7ViewSet(viewsets.ModelViewSet):
     """
@@ -32,9 +33,18 @@ class HL7ViewSet(viewsets.ModelViewSet):
         # serializer.save(owner=self.request.user)
         serializer.save()
         hl7xml = serializer.instance.MESSAGE_BODY;
+
         path =os.path.abspath(os.curdir)+'\\HL7\\fixtures\\入科hl7消息报文.xml'
         path = path.replace('\\','/')
+        strxml=""
+        with open(path,encoding='utf-8') as file:
+            strxml = file.read()
+        jcm = JHINIS_CARE_MAIN()
+        jcm.APPLY_ID=222
+        hl7 = HL7Utils(jcm,strxml)
+        ret = hl7.getInstance()
         doc = ET.parse(path)
+        # doc = ET.fromstring(strxml)
         root = doc.getroot()
         print(root.tag,"|",root.attrib)
         # namespaces = {'HL7': 'urn:hl7-org:v3','xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
