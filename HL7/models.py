@@ -17,7 +17,7 @@ class HL7_MESSAGE_LOGS(models.Model):
         ordering = ('CREATE_DATE', )
 
 
-class JHINIS_CARE_MAIN(models.Model):
+class JHNIS_CARE_MAIN(models.Model):
     CARE_MAIN_INDEX = models.AutoField('护理主索引',primary_key=True)
     APPLY_ID = models.IntegerField( '该患者是否已经归档', blank=False, null=False, default=0)
     PATIENT_ID= models.CharField('病案号',max_length=100, blank=True, default='')
@@ -28,7 +28,7 @@ class JHINIS_CARE_MAIN(models.Model):
     CREATE_USER= models.CharField('创建人',max_length=100, blank=True, default='')
     CREATE_DATE= models.DateTimeField('创建日期',auto_now_add=True)
     IN_DEPT_DATE= models.DateTimeField('入科日期')
-    OUT_DEPT_DATE= models.DateTimeField('出科日期')
+    OUT_DEPT_DATE= models.DateTimeField('出科日期', blank=False, null=False)
     STATE = models.IntegerField( '是否有效（0：有效 1：无效）', blank=False, null=False, default=0)
     DOCTOR= models.CharField('住院号',max_length=100, blank=True, default='')
     DEPT_CODE= models.CharField('住院号',max_length=100, blank=True, default='')

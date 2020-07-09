@@ -5,7 +5,7 @@ from rest_framework import permissions, renderers, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from HL7.models import JHINIS_CARE_MAIN
+from HL7.models import JHNIS_CARE_MAIN
 from HL7.permissions import IsOwnerOrReadOnly
 from HL7.serializers import HL7Serializer, UserSerializer
 import xml.etree.ElementTree as ET
@@ -18,7 +18,7 @@ class HL7ViewSet(viewsets.ModelViewSet):
 
     Additionally we also provide an extra `highlight` action.
     """
-    queryset = JHINIS_CARE_MAIN.objects.all()
+    queryset = JHNIS_CARE_MAIN.objects.all()
     serializer_class = HL7Serializer
     # permission_classes = (
     #     permissions.IsAuthenticatedOrReadOnly,
@@ -39,10 +39,11 @@ class HL7ViewSet(viewsets.ModelViewSet):
         strxml=""
         with open(path,encoding='utf-8') as file:
             strxml = file.read()
-        jcm = JHINIS_CARE_MAIN()
+        jcm = JHNIS_CARE_MAIN()
         jcm.APPLY_ID=222
         hl7 = HL7Utils(jcm,strxml)
         ret = hl7.getInstance()
+        ret.save()
         doc = ET.parse(path)
         # doc = ET.fromstring(strxml)
         root = doc.getroot()

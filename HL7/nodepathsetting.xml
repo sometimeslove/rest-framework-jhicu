@@ -4,7 +4,6 @@
 <!--DrugOrder对应的是哪个xml，DrugOrder对应的药品医嘱开立的xml-->
 <!--DEPT_CODE是节点名一般对应的是数据库中存储的字段名-->
 <!--NodePath是要获取的节点的路径-->
-<!--NodeIndex是在该节点路径下有多个同级兄弟节点时，该节点的index；index从0开始-->
 <!--AttributName是属性名，指我们通过该节点的属性名来获取值-->
 <!--DefaultValue默认值，如药品医嘱的orderclass我们就将他的医嘱类别设为A-->
 <Config>
@@ -12,34 +11,30 @@
   <JHNIS_CARE_MAIN>
     <!--病区编码-->
     <DEPT_CODE>
-      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/location/serviceDeliveryLocation/location/id/item</NodePath>
+      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/location/serviceDeliveryLocation/location/id/item[@root='1.2.156.112698.1.1.1.4.7']</NodePath>
       <AttributName>extension</AttributName>
     </DEPT_CODE>
 
     <!--科室名称-->
     <DEPT_NAME>
-      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/location/serviceDeliveryLocation/location/id/item</NodePath>
-      <AttributName>value</AttributName>
+      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/location/serviceDeliveryLocation/location/name</NodePath>
     </DEPT_NAME>
 
     <!--患者patientID-->
     <PATIENT_ID>
-      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/subject/patient/id/item</NodePath>
-      <NodeIndex>1</NodeIndex>
+      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/subject/patient/id/item[@root='1.2.156.112698.1.1.2.1.6']</NodePath>
       <AttributName>extension</AttributName>
     </PATIENT_ID>
 
     <!--住院次数-->
     <VISIT_ID>
-      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/id/item</NodePath>
-      <NodeIndex>0</NodeIndex>
+      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/id/item[@root='1.2.156.112698.1.1.2.1.22']</NodePath>
       <AttributName>extension</AttributName>
     </VISIT_ID>
 
     <!--就诊流水号-->
     <INP_NO>
-      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/id/item</NodePath>
-      <NodeIndex>1</NodeIndex>
+      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/id/item[@root='1.2.156.112698.1.1.2.1.21']</NodePath>
       <AttributName>extension</AttributName>
     </INP_NO>
 
@@ -49,12 +44,6 @@
       <AttributName>value</AttributName>
     </IN_DEPT_DATE>
 
-    <!--科室编码-->
-    <DEPT_CODE>
-      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/location/serviceDeliveryLocation/id/item</NodePath>
-      <AttributName>extension</AttributName>
-    </DEPT_CODE>
-
     <!--床号（在DIRECTION字段中存储his的床号，代码中转换为我们自己的bedno然后存到我们对应的表的字段中）-->
     <DIRECTION>
       <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/location/serviceDeliveryLocation/location/positionText</NodePath>
@@ -62,256 +51,5 @@
     </DIRECTION>
 
   </JHNIS_CARE_MAIN>
-
-  <!--患者转科相关节点配置（住院医师节点在代码中特殊处理，没有做成配置）-->
-  <TranDept>
-    <!--出科病区编码-->
-    <OUT_DEPT_CODE>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/subject/patient/addr/item/part</NodePath>
-      <NodeIndex>0</NodeIndex>
-      <AttributName>code</AttributName>
-    </OUT_DEPT_CODE>
-
-    <!--入科病区编码-->
-    <IN_DEPT_CODE>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/performer/assignedParty1/addr/item/part</NodePath>
-      <NodeIndex>0</NodeIndex>
-      <AttributName>code</AttributName>
-    </IN_DEPT_CODE>
-
-    <!--出科科室(转科前患者所在的老科室)-->
-    <SOURCE_DEPT>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/subject/patient/providerOrganization/id/item</NodePath>
-      <AttributName>extension</AttributName>
-    </SOURCE_DEPT>
-
-    <!--入科科室（转科的目标科室）-->
-    <DEPT_CODE>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/performer/assignedParty1/representedOrganization/id/item</NodePath>
-      <AttributName>extension</AttributName>
-    </DEPT_CODE>
-
-    <!--转科发生时间-->
-    <OUT_DEPT_DATE>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/effectiveTime/any</NodePath>
-      <AttributName>value</AttributName>
-    </OUT_DEPT_DATE>
-
-    <!--床号（这里的床号是his的床号）-->
-    <BED_ID>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/performer/assignedParty1/addr/item/part</NodePath>
-      <NodeIndex>1</NodeIndex>
-      <AttributName>value</AttributName>
-    </BED_ID>
-
-    <!--患者id-->
-    <PATIENT_ID>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/subject/patient/id/item</NodePath>
-      <NodeIndex>1</NodeIndex>
-      <AttributName>extension</AttributName>
-    </PATIENT_ID>
-
-    <!--住院次数-->
-    <VISIT_ID>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/subject/patient/id/item</NodePath>
-      <NodeIndex>3</NodeIndex>
-      <AttributName>extension</AttributName>
-    </VISIT_ID>
-
-    <!--就诊流水号-->
-    <INP_NO>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/subject/patient/id/item</NodePath>
-      <NodeIndex>2</NodeIndex>
-      <AttributName>extension</AttributName>
-    </INP_NO>
-
-    <!--入院日期、创建日期-->
-    <IN_DEPT_DATE>
-      <NodePath>/REPC_IN003130UV01/controlActProcess/subject/careProvisionPromise/effectiveTime/any</NodePath>
-      <AttributName>value</AttributName>
-    </IN_DEPT_DATE>
-
-  </TranDept>
-
-  <!--患者换床的相关节点配置-->
-  <TranBed>
-
-    <!--病区编码-->
-    <DEPT_CODE>
-      <NodePath>/PRPA_IN302011UV/controlActProcess/subject/encounterEvent/location1/serviceDeliveryLocation/location/asLocatedEntityPartOf/location/asLocatedEntityPartOf/location/id/item</NodePath>
-      <AttributName>extension</AttributName>
-    </DEPT_CODE>
-
-    <!--患者流水号-->
-    <INP_NO>
-      <NodePath>/PRPA_IN302011UV/controlActProcess/subject/encounterEvent/id/item</NodePath>
-      <NodeIndex>2</NodeIndex>
-      <AttributName>extension</AttributName>
-    </INP_NO>
-
-    <!--换床时间-->
-    <CHANGE_TIME>
-      <NodePath>/PRPA_IN302011UV/controlActProcess/subject/encounterEvent/location1/time/any</NodePath>
-      <AttributName>value</AttributName>
-    </CHANGE_TIME>
-
-    <!--换床后的新床-->
-    <NEW_BED_ID>
-      <NodePath>/PRPA_IN302011UV/controlActProcess/subject/encounterEvent/location1/serviceDeliveryLocation/location/id/item</NodePath>
-      <AttributName>extension</AttributName>
-    </NEW_BED_ID>
-
-    <!--换床前的旧床-->
-    <OLD_BED_ID>
-      <NodePath>/PRPA_IN302011UV/controlActProcess/subject/encounterEvent/location2/serviceDeliveryLocation/location/id/item</NodePath>
-      <AttributName>extension</AttributName>
-    </OLD_BED_ID>
-
-  </TranBed>
-
-  <!--患者出院的相关节点配置-->
-  <PatientOutHospital>
-
-    <!--病区编码-->
-    <DEPT_CODE>
-      <NodePath>/PRPA_IN402003UV02/controlActProcess/subject/inpatientEncounterEvent/subject/patient/addr/item/part</NodePath>
-      <NodeIndex>0</NodeIndex>
-      <AttributName>code</AttributName>
-    </DEPT_CODE>
-
-    <!--患者流水号-->
-    <INP_NO>
-      <NodePath>/PRPA_IN402003UV02/controlActProcess/subject/inpatientEncounterEvent/subject/patient/id/item</NodePath>
-      <NodeIndex>2</NodeIndex>
-      <AttributName>extension</AttributName>
-    </INP_NO>
-
-    <!--住院次数-->
-    <VISIT_ID>
-      <NodePath>/PRPA_IN402003UV02/controlActProcess/subject/inpatientEncounterEvent/id/item</NodePath>
-      <AttributName>extension</AttributName>
-    </VISIT_ID>
-
-    <!--患者id-->
-    <PATIENT_ID>
-      <NodePath>/PRPA_IN402003UV02/controlActProcess/subject/inpatientEncounterEvent/subject/patient/id/item</NodePath>
-      <NodeIndex>1</NodeIndex>
-      <AttributName>extension</AttributName>
-    </PATIENT_ID>
-
-    <!--出院时间-->
-    <OUT_DEPT_DATE>
-      <NodePath>/PRPA_IN402003UV02/controlActProcess/subject/inpatientEncounterEvent/effectiveTime/any</NodePath>
-      <AttributName>value</AttributName>
-    </OUT_DEPT_DATE>
-
-  </PatientOutHospital>
-
-  <!--患者出院召回的相关节点配置-->
-  <CalPatientOut>
-
-    <!--病区编码-->
-    <DEPT_CODE>
-      <NodePath>/PRPA_IN402007UV02/controlActProcess/subject/inpatientEncounterEvent/subject/patient/addr/item/part</NodePath>
-      <NodeIndex>0</NodeIndex>
-      <AttributName>code</AttributName>
-    </DEPT_CODE>
-
-    <!--患者流水号-->
-    <INP_NO>
-      <NodePath>/PRPA_IN402007UV02/controlActProcess/subject/inpatientEncounterEvent/id/item</NodePath>
-      <NodeIndex>1</NodeIndex>
-      <AttributName>extension</AttributName>
-    </INP_NO>
-
-    <!--住院次数-->
-    <VISIT_ID>
-      <NodePath>/PRPA_IN402007UV02/controlActProcess/subject/inpatientEncounterEvent/id/item</NodePath>
-      <NodeIndex>0</NodeIndex>
-      <AttributName>extension</AttributName>
-    </VISIT_ID>
-
-    <!--患者id-->
-    <PATIENT_ID>
-      <NodePath>/PRPA_IN402007UV02/controlActProcess/subject/inpatientEncounterEvent/subject/patient/id/item</NodePath>
-      <NodeIndex>1</NodeIndex>
-      <AttributName>extension</AttributName>
-    </PATIENT_ID>
-
-  </CalPatientOut>
-
-  <!--撤销停止医嘱相关节点配置-->
-  <LabResult>
-    <!--患者patientID-->
-    <PATIENT_ID>
-      <NodePath>/ClinicalDocument/recordTarget/patientRole/id</NodePath>
-      <NodeIndex>0</NodeIndex>
-      <AttributName>extension</AttributName>
-    </PATIENT_ID>
-
-    <!--住院次数-->
-    <VISIT_ID>
-      <NodePath>/ClinicalDocument/recordTarget/patientRole/id</NodePath>
-      <NodeIndex>1</NodeIndex>
-      <AttributName>extension</AttributName>
-    </VISIT_ID>
-
-    <!--就诊流水号-->
-    <INP_NO>
-      <NodePath>/ClinicalDocument/recordTarget/patientRole/id</NodePath>
-      <NodeIndex>2</NodeIndex>
-      <AttributName>extension</AttributName>
-    </INP_NO>
-
-    <!--申请单号-->
-    <LAB_APPLY_NO>
-      <NodePath>/ClinicalDocument/recordTarget/patientRole/id</NodePath>
-      <NodeIndex>4</NodeIndex>
-      <AttributName>extension</AttributName>
-    </LAB_APPLY_NO>
-
-    <!--医嘱流水号-->
-    <ORDER_CODE>
-      <NodePath>/ClinicalDocument/inFulfillmentOf/order/id</NodePath>
-      <AttributName>extension</AttributName>
-    </ORDER_CODE>
-
-    <!--样本号-->
-    <SPECIMEN_NO>
-      <NodePath>/ClinicalDocument/component/structuredBody/component/section/entry/observation/value/component/section/entry/act/specimen/specimenRole/id</NodePath>
-      <AttributName>extension</AttributName>
-    </SPECIMEN_NO>
-
-    <!--报告时间-->
-    <REPORT_DATE_TIME>
-      <NodePath>/ClinicalDocument/author/time</NodePath>
-      <AttributName>value</AttributName>
-    </REPORT_DATE_TIME>
-
-    <!--样本代码(微生物)-->
-    <SPECIMEN_CODE>
-      <NodePath>/ClinicalDocument/component/structuredBody/component/section/entry/observation/value/component/section/entry/act/specimen/specimenRole/specimenPlayingEntity/code</NodePath>
-      <AttributName>code</AttributName>
-    </SPECIMEN_CODE>
-
-    <!--样本名称-->
-    <SPECIMEN>
-      <NodePath>/ClinicalDocument/component/structuredBody/component/section/entry/observation/value/component/section/entry/act/specimen/specimenRole/specimenPlayingEntity/code</NodePath>
-      <AttributName>displayName</AttributName>
-    </SPECIMEN>
-
-    <!--项目编码-->
-    <PARITEMNO>
-      <NodePath>/ClinicalDocument/component/structuredBody/component/section/entry/observation/value/component/section/entry/act/specimen/specimenRole/id</NodePath>
-      <AttributName>extension</AttributName>
-    </PARITEMNO>
-
-    <!--项目名称-->
-    <PARITEMNAME>
-      <NodePath>/ClinicalDocument/component/structuredBody/component/section/entry/observation/value/component/section/entry/act/specimen/specimenRole/specimenPlayingEntity/code</NodePath>
-      <AttributName>displayName</AttributName>
-    </PARITEMNAME>
-
-  </LabResult>
 
 </Config>
