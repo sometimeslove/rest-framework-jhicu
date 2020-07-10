@@ -11,8 +11,14 @@ STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 class HL7_MESSAGE_LOGS(models.Model):
     # MESSAGE_ID = models.AutoField('消息ID',primary_key=True)
     MESSAGE_BODY= models.CharField('消息主体',max_length=10000, blank=True, default='')
+    ACTION_NAME= models.CharField('消息类型',max_length=100, blank=True, default='')
     CREATE_USER= models.CharField('创建人',max_length=100, blank=True, default='')
     CREATE_DATE= models.DateTimeField('创建日期',auto_now_add=True)
+    PATIENT_ID= models.CharField('患者ID',max_length=100, blank=True, default='')
+    VISIT_ID= models.CharField('住院次',max_length=100, blank=True, default='')
+    INP_NO= models.CharField('住院流水号',max_length=100, blank=True, default='')
+    ORDER_NO= models.CharField('医嘱主键',max_length=100, blank=True, default='')
+    RESULT= models.CharField('处理结果（0：成功  1：失败）',max_length=100, blank=True, default='')
     class Meta:
         ordering = ('CREATE_DATE', )
 

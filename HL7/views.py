@@ -30,32 +30,31 @@ class HL7ViewSet(viewsets.ModelViewSet):
         return Response(snippet.highlighted)
 
     def perform_create(self, serializer):
-        # serializer.save(owner=self.request.user)
+        self.HIPMessageServer(serializer)
         serializer.save()
-        hl7xml = serializer.instance.MESSAGE_BODY;
 
-        path =os.path.abspath(os.curdir)+'\\HL7\\fixtures\\入科hl7消息报文.xml'
-        path = path.replace('\\','/')
-        strxml=""
-        with open(path,encoding='utf-8') as file:
-            strxml = file.read()
-        jcm = JHNIS_CARE_MAIN()
-        jcm.APPLY_ID=222
-        hl7 = HL7Utils(jcm,strxml)
-        ret = hl7.getInstance()
-        ret.save()
-        doc = ET.parse(path)
-        # doc = ET.fromstring(strxml)
-        root = doc.getroot()
-        print(root.tag,"|",root.attrib)
-        # namespaces = {'HL7': 'urn:hl7-org:v3','xsi': 'http://www.w3.org/2001/XMLSchema-instance'}
-        namespace = {'urn':'urn:hl7-org:v3'}
-        for child in root:
-            print(child.tag,"|",child.text)
-        # node = root.find('{urn:hl7-org:v3}'+'id')
-        node = root.find('urn:id',namespace)
-        print(node.tag)
-        print(node.text)
+    def HIPMessageServer(self,serializer):
+        try:
+            # serializer.save(owner=self.request.user)
+            strxml = serializer.instance.MESSAGE_BODY;
+            actionname = serializer.instance.ACTION_NAME;
+            # path =os.path.abspath(os.curdir)+'\\HL7\\fixtures\\入科hl7消息报文.xml'
+            # path = path.replace('\\','/')
+            # strxml=""
+            # with open(path,encoding='utf-8') as file:
+            #     strxml = file.read()
+            jcm = JHNIS_CARE_MAIN()
+            hl7 = HL7Utils(jcm,strxml)
+            hl7.ConvertInstance()
+            jcm.save()
+            serializer.instance.STATE='0'
+            serializer.instance.PATIENT_ID=jcm.PATIENT_ID
+            serializer.instance.VISIT_ID=jcm.VISIT_ID
+            serializer.instance.INP_NO=jcm.INP_NO
+            serializer.instance.PATIENT_ID=jcm
+        except:
+            serializer.instance.STATE='1'
+
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):

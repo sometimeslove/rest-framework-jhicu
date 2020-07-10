@@ -11,7 +11,7 @@ class HL7Serializer(serializers.ModelSerializer):
 
     class Meta:
         model = HL7_MESSAGE_LOGS
-        fields = ('MESSAGE_BODY', 'CREATE_USER')
+        fields = ('MESSAGE_BODY', 'ACTION_NAME')
         # fields = ('__all__')
 
 

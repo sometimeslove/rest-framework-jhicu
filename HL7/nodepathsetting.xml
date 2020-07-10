@@ -38,11 +38,17 @@
       <AttributName>extension</AttributName>
     </INP_NO>
 
-    <!--入院日期、创建日期-->
+    <!--入科日期、创建日期-->
     <IN_DEPT_DATE>
       <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/effectiveTime/any</NodePath>
       <AttributName>value</AttributName>
     </IN_DEPT_DATE>
+
+      <!--出科日期-->
+    <OUT_DEPT_DATE>
+      <NodePath>/PRPA_IN400001UV/controlActProcess/subject/encounterEvent/effectiveTime/any</NodePath>
+      <AttributName>value</AttributName>
+    </OUT_DEPT_DATE>
 
     <!--床号（在DIRECTION字段中存储his的床号，代码中转换为我们自己的bedno然后存到我们对应的表的字段中）-->
     <DIRECTION>

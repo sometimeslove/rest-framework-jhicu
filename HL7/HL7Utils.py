@@ -12,7 +12,7 @@ class HL7Utils():
         self.xmlstr = xml
         self.namespace = namespace or self.namespace
 
-    def getInstance(self):
+    def ConvertInstance(self):
         doc = ET.fromstring(self.xmlstr)
         instance = self.model
         path =os.path.abspath(os.curdir)+'\\HL7\\nodepathsetting.xml'
