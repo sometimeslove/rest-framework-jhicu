@@ -30,32 +30,51 @@ class HL7ViewSet(viewsets.ModelViewSet):
         return Response(snippet.highlighted)
 
     def perform_create(self, serializer):
-        self.HIPMessageServer(serializer)
         serializer.save()
+        self.HIPMessageServer(serializer)
+        serializer.instance.save()
 
     def HIPMessageServer(self,serializer):
         try:
-            # serializer.save(owner=self.request.user)
-            strxml = serializer.instance.MESSAGE_BODY;
             actionname = serializer.instance.ACTION_NAME;
-            # path =os.path.abspath(os.curdir)+'\\HL7\\fixtures\\入科hl7消息报文.xml'
-            # path = path.replace('\\','/')
-            # strxml=""
-            # with open(path,encoding='utf-8') as file:
-            #     strxml = file.read()
-            jcm = JHNIS_CARE_MAIN()
-            hl7 = HL7Utils(jcm,strxml)
-            hl7.ConvertInstance()
-            jcm.save()
-            serializer.instance.STATE='0'
-            serializer.instance.PATIENT_ID=jcm.PATIENT_ID
-            serializer.instance.VISIT_ID=jcm.VISIT_ID
-            serializer.instance.INP_NO=jcm.INP_NO
-            serializer.instance.PATIENT_ID=jcm
+            if actionname == "indept":
+                self.InDeptBussiness(serializer)
+            elif actionname == "outdept":
+                self.OutDeptBussiness(serializer)
+            elif actionname == "transdept":
+                self.TransDeptBussiness(serializer)
+            elif actionname == "transbed":
+                self.TransbedBussiness(serializer)
+            elif actionname == "order":
+                self.OrderBussiness(serializer)
+            else:
+                self.InDeptBussiness(serializer)
         except:
-            serializer.instance.STATE='1'
+            serializer.instance.RESULT='1'
+    def InDeptBussiness(self, serializer):
+        # path =os.path.abspath(os.curdir)+'\\HL7\\fixtures\\入科hl7消息报文.xml'
+        # path = path.replace('\\','/')
+        # strxml=""
+        # with open(path,encoding='utf-8') as file:
+        #     strxml = file.read()
+        strxml = serializer.instance.MESSAGE_BODY;
+        jcm = JHNIS_CARE_MAIN()
+        hl7 = HL7Utils(jcm, strxml)
+        hl7.ConvertInstance()
+        jcm.save()
+        serializer.instance.RESULT = '0'
+        serializer.instance.PATIENT_ID = jcm.PATIENT_ID
+        serializer.instance.VISIT_ID = jcm.VISIT_ID
+        serializer.instance.INP_NO = jcm.INP_NO
 
-
+    def OutDeptBussiness(self,serializer):
+        pass
+    def TransDeptBussiness(self,serializer):
+        pass
+    def TransbedBussiness(self,serializer):
+        pass
+    def OrderBussiness(self,serializer):
+        pass
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
